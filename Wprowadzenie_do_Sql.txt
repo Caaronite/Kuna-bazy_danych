@@ -1,0 +1,257 @@
+CREATE TABLE pracownicy (
+    
+    id_pracownika INT PRIMARY KEY,
+    imie VARCHAR(20) NOT NULL,
+    nazwisko VARCHAR(20) NOT NULL,
+    adres VARCHAR(30),
+    telefon VARCHAR(9),
+    id_godziny INT,
+    id_pensji INT
+    
+    
+);
+
+CREATE TABLE godziny (
+    
+    id_godziny INT PRIMARY KEY,
+    _data DATE,
+    liczba_godzin DECIMAL(4,2),
+    id_pracownika INT
+    
+    
+    
+    
+);
+
+
+CREATE TABLE pensje(
+    
+    id_pensji INT PRIMARY KEY,
+    stanowisko VARCHAR(50),
+    kwota INT,
+    id_premii INT,
+    id_pracownika INT
+    
+    
+);
+
+
+CREATE TABLE premie (
+    
+    id_premii INT PRIMARY KEY,
+    rodzaj VARCHAR(20),
+    kwota INT
+    
+    
+);
+
+
+ALTER TABLE pracownicy
+ADD FOREIGN KEY(id_godziny)
+REFERENCES godziny(id_godziny)
+ON DELETE SET NULL;
+
+
+
+ALTER TABLE pracownicy
+ADD FOREIGN KEY(id_pensji)
+REFERENCES pensje(id_pensji)
+ON DELETE SET NULL;
+
+
+ALTER TABLE godziny
+ADD FOREIGN KEY(id_pracownika)
+REFERENCES pracownicy(id_pracownika)
+ON DELETE SET NULL;
+
+ALTER TABLE pensje
+ADD FOREIGN KEY(id_pracownika)
+REFERENCES pracownicy(id_pracownika)
+ON DELETE SET NULL;
+
+ALTER TABLE pensje
+ADD FOREIGN KEY(id_premii)
+REFERENCES premie(id_premii)
+ON DELETE SET NULL;
+
+
+INSERT INTO pracownicy VALUES(1,'Karolina','Kuna','Witolda Budryka 3','123456789',NULL,NULL);
+INSERT INTO godziny VALUES(1,'2001-10-09',8.5,1);
+INSERT INTO pensje VALUES(1,'Back-end developer',12000,NULL,1);
+INSERT INTO premie VALUES(1,'Nadgodziny',5000);
+
+UPDATE pracownicy
+SET id_godziny =1
+WHERE id_pracownika = 1;
+
+UPDATE pracownicy
+SET id_pensji =1
+WHERE id_pracownika = 1;
+
+UPDATE pensje
+SET id_premii = 1
+WHERE id_pensji = 1;
+
+INSERT INTO pracownicy VALUES(2,'Jan','Kowalski','Kijowska 4','987654321',NULL,NULL);
+INSERT INTO godziny VALUES(2,'2002-09-08',5.5,2);
+INSERT INTO pensje VALUES(2,'Front-end developer',12000,NULL,2);
+INSERT INTO premie VALUES(2,'Wyniki',6000);
+
+
+UPDATE pracownicy
+SET id_godziny =2
+WHERE id_pracownika = 2;
+
+
+UPDATE pracownicy
+SET id_pensji =2
+WHERE id_pracownika = 2;
+
+UPDATE pensje
+SET id_premii = 2
+WHERE id_pensji = 2;
+
+
+INSERT INTO pracownicy VALUES(3,'Alina','Armińska','Nawojki 4','543543543',NULL,NULL);
+INSERT INTO godziny VALUES(3,'2003-08-07',6,3);
+INSERT INTO pensje VALUES(3,'Mainframe Developer',8000,NULL,3);
+INSERT INTO premie VALUES(3,'Brak upomnień',2000);
+
+UPDATE pracownicy
+SET id_godziny =3
+WHERE id_pracownika = 3;
+
+UPDATE pracownicy
+SET id_pensji =3
+WHERE id_pracownika = 3;
+
+UPDATE pensje
+SET id_premii = 3
+WHERE id_pensji = 3;
+
+INSERT INTO pracownicy VALUES(4,'Agnieszka','Abramczyk','Piastowska 6','213213213',NULL,NULL);
+INSERT INTO godziny VALUES(4,'2004-08-06',7.5,4);
+INSERT INTO pensje VALUES(4,'Data Scientist',9000,NULL,4);
+INSERT INTO premie VALUES(4,'Polecenie pracownika',1000);
+
+UPDATE pracownicy
+SET id_godziny =4
+WHERE id_pracownika = 4;
+
+UPDATE pracownicy
+SET id_pensji =4
+WHERE id_pracownika = 4;
+
+UPDATE pensje
+SET id_premii = 4
+WHERE id_pensji = 4;
+
+INSERT INTO pracownicy VALUES(5,'Agnieszka','Adamowska','Królewska 7','111111111',NULL,NULL);
+INSERT INTO godziny VALUES(5,'2005-07-05',4.45,5);
+INSERT INTO pensje VALUES(5,'Software tester ',9000,NULL,5);
+INSERT INTO premie VALUES(5,'Wyniki',3000);
+
+
+UPDATE pracownicy
+SET id_godziny = 5
+WHERE id_pracownika = 5;
+
+UPDATE pracownicy
+SET id_pensji =5
+WHERE id_pracownika = 5;
+
+UPDATE pensje
+SET id_premii = 5
+WHERE id_pensji = 5;
+
+INSERT INTO pracownicy VALUES(6,'Aaron','Borowski','Juliusza Lea 8','456456456',NULL,NULL);
+INSERT INTO godziny VALUES(6,'2006-10-04',9,6);
+INSERT INTO pensje VALUES(6,'Junior Back-end Developer',4000,NULL,6);
+INSERT INTO premie VALUES(6,'NULL',0);
+
+UPDATE pracownicy
+SET id_godziny = 6
+WHERE id_pracownika = 6;
+
+UPDATE pracownicy
+SET id_pensji =6
+WHERE id_pracownika = 6;
+
+
+UPDATE pensje
+SET id_premii = 6
+WHERE id_pensji = 6;
+
+
+INSERT INTO pracownicy VALUES(7,'Błażej','Brzozowski','Reymonta 9','987987987',NULL,NULL);
+INSERT INTO godziny VALUES(7,'2005-02-04',7.45,7);
+INSERT INTO pensje VALUES(7,'Video games tester',4000,NULL,7);
+INSERT INTO premie VALUES(7,'NULL',0);
+
+
+UPDATE pracownicy
+SET id_godziny = 7
+WHERE id_pracownika = 7;
+
+UPDATE pracownicy
+SET id_pensji =7
+WHERE id_pracownika = 7;
+
+UPDATE pensje
+SET id_premii = 7
+WHERE id_pensji = 7;
+
+
+INSERT INTO pracownicy VALUES(8,'Daniel','Bachleda','Czarnowiejska 10','456456456',NULL,NULL);
+INSERT INTO godziny VALUES(8,'2004-01-03',10,8);
+INSERT INTO pensje VALUES(8,'Magazynier',2800,NULL,8);
+INSERT INTO premie VALUES(8,'NULL',0);
+
+UPDATE pracownicy
+SET id_godziny = 8
+WHERE id_pracownika = 8;
+
+UPDATE pracownicy
+SET id_pensji =8
+WHERE id_pracownika = 8;
+
+UPDATE pensje
+SET id_premii = 8
+WHERE id_pensji = 8;
+
+INSERT INTO pracownicy VALUES(9,'Krzysztof','Górski','Bratysławska 4','632632632',NULL,NULL);
+INSERT INTO godziny VALUES(9,'2013-07-07',8.45,9);
+INSERT INTO pensje VALUES(9,'Sprzedawca',2800,NULL,9);
+INSERT INTO premie VALUES(9,'Wyniki',2000);
+
+UPDATE pracownicy
+SET id_godziny = 9
+WHERE id_pracownika = 9;
+
+UPDATE pracownicy
+SET id_pensji =9
+WHERE id_pracownika = 9;
+
+
+UPDATE pensje
+SET id_premii = 9
+WHERE id_pensji = 9;
+
+INSERT INTO pracownicy VALUES(10,'Katarzyna','Jabłońska','Wrocławska 11','478478478',NULL,NULL);
+INSERT INTO godziny VALUES(10,'2000-09-08',5.5,10);
+INSERT INTO pensje VALUES(10,'Doradca klienta',3000,NULL,10);
+INSERT INTO premie VALUES(10,'NULL',0);
+
+
+
+UPDATE pracownicy
+SET id_godziny = 10
+WHERE id_pracownika = 10;
+
+UPDATE pracownicy
+SET id_pensji =10
+WHERE id_pracownika = 10;
+
+UPDATE pensje
+SET id_premii = 10
+WHERE id_pensji = 10;
