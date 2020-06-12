@@ -1,0 +1,135 @@
+CREATE database firma;
+CREATE SCHEMA ksiegowosc;
+
+
+CREATE TABLE ksiegowosc.pracownicy (
+    
+    id_pracownika INT AUTO_INCREMENT,
+    imie VARCHAR(20) NOT NULL,
+    nazwisko VARCHAR(20) NOT NULL,
+    adres VARCHAR(50),
+    telefon VARCHAR(9) 
+    PRIMARY KEY(id_pracownika) 
+);
+
+CREATE TABLE ksiegowosc.godziny(
+id_godziny INT AUTO_INCREMENT, 
+id_pracownika INT,
+data DATE NOT NULL, 
+liczba_godzin INT NOT NULL,
+PRIMARY KEY(id_godziny)
+);
+
+
+CREATE TABLE  ksiegowosc.pensja(
+id_pensji INT AUTO_INCREMENT,
+kwota FLOAT NOT NULL,
+stanowisko VARCHAR(50),
+PRIMARY KEY(id_pensji)
+);
+
+CREATE TABLE ksiegowosc.wynagrodzenie(
+id_wynagrodzenia INT AUTO_INCREMENT,
+id_pracownika INT NOT NULL,
+id_godziny INT,
+id_pensji INT NOT NULL,
+id_premii INT,
+data DATE,
+PRIMARY KEY(id_wynagrodzenia)
+);
+
+
+CREATE TABLE ksiegowosc.premia(id_premii INT AUTO_INCREMENT,
+kwota FLOAT,
+rodzaj VARCHAR(30),
+PRIMARY KEY(id_premii)
+);
+
+
+ALTER TABLE ksiegowosc.godziny
+ADD CONSTRAINT FK_pracownik
+FOREIGN KEY(id_pracownika) 
+REFERENCES pracownicy(id_pracownika);
+
+ALTER TABLE wynagrodzenie
+ADD CONSTRAINT FK_pracownicy
+FOREIGN KEY(id_pracownika) 
+REFERENCES pracownicy(id_pracownika);
+
+ALTER TABLE wynagrodzenie
+ADD CONSTRAINT FK_godziny
+FOREIGN KEY(id_godziny) 
+REFERENCES godziny(id_godziny);
+
+ALTER TABLE wynagrodzenie
+ADD CONSTRAINT FK_pensji
+FOREIGN KEY(id_pensji) 
+REFERENCES pensja(id_pensji);
+
+ALTER TABLE wynagrodzenie
+ADD CONSTRAINT FK_premii
+FOREIGN KEY(id_premii) 
+REFERENCES premia(id_premii);
+
+
+
+
+INSERT INTO pracownicy VALUES (1,"Karolina","Kuna","ul. Budryka 3a, Kraków","123456789");
+INSERT INTO pracownicy VALUES (2,"Jan","Kowalski","ul. Krakowska 2, Kraków","987654321");
+INSERT INTO pracownicy VALUES (3,"Anna","Nowak","ul. Królewska 1, Kraków","867543901");
+INSERT INTO pracownicy VALUES (4,"Marek","Adamowski","ul. Bratysławska 10/22, Kraków","111112223");
+INSERT INTO pracownicy VALUES (5,"Alicja","Badowska","ul. Podgórska 12/13, Kraków","444433355");
+INSERT INTO pracownicy VALUES (6,"Mateusz","Baj","ul. Grudniowa 14/44, Kraków","999944477");
+INSERT INTO pracownicy VALUES (7,"Tomasz","Gajda","ul. Mogilska 22a, Kraków","566789123");
+INSERT INTO pracownicy VALUES (8,"Wiktor","Grabowski","ul. Czarnowiejska 44, Kraków","333444110");
+INSERT INTO pracownicy VALUES (9,"Adrianna","Chmiel","ul. Warszawska 11a, Kraków","555566610");
+INSERT INTO pracownicy VALUES (10,"Katarzyna","Halicka","ul. Mazowiecka 34/57, Kraków","111000222");
+
+
+
+NSERT INTO godziny VALUES(1,"2020-01-01",7,4);
+INSERT INTO godziny VALUES(2,"2020-02-04",4,7);
+INSERT INTO godziny VALUES(3,"2020-03-05",7,4);
+INSERT INTO godziny VALUES(4,"2020-04-06",4,7);
+INSERT INTO godziny VALUES(5,"2020-05-07",7,8);
+INSERT INTO godziny VALUES(6,"2020-06-08",11,2);
+INSERT INTO godziny VALUES(7,"2020-07-09",8,8);
+INSERT INTO godziny VALUES(8,"2020-08-10",8,4);
+INSERT INTO godziny VALUES(9,"2020-09-11",3,9);
+INSERT INTO godziny VALUES(10,"2020-10-12",12,10);
+
+
+INSERT INTO pensja VALUES(1,"junior java developer",4000.00);
+INSERT INTO pensja VALUES(2,"senior java developer",8000.00);
+INSERT INTO pensja VALUES(3,"junior python developer",4000.00);
+INSERT INTO pensja VALUES(4,"senior python developer",8000.00);
+INSERT INTO pensja VALUES(5,"sprzedawca",3500.00);
+INSERT INTO pensja VALUES(6,"manager",3500.00);
+INSERT INTO pensja VALUES(7,"specjalista HR",4500.00);
+INSERT INTO pensja VALUES(8,"junior javascript developer",3500.00);
+INSERT INTO pensja VALUES(9,"senior javascript developer",8000.00);
+INSERT INTO pensja VALUES(10,"analityk rynkowy",4000.00);
+
+
+INSERT INTO premia VALUES(1,"dodatkowe osiagniecia",1000.00);
+INSERT INTO premia VALUES(2,"dodatkowe osiagniecia",2000.00);
+INSERT INTO premia VALUES(3,"dodatkowe osiagniecia",3000.00);
+INSERT INTO premia VALUES(4,"nadgodziny",10000.00);
+INSERT INTO premia VALUES(5,"nadgodziny",1000.00);
+INSERT INTO premia VALUES(6,"nadgodziny",1000.00);
+INSERT INTO premia VALUES(7,"nadgodziny",300.00);
+INSERT INTO premia VALUES(8,"nadgodziny",500.00);
+INSERT INTO premia VALUES(9,"polecenie pracownika",500.00);
+INSERT INTO premia VALUES(10,"polecenie pracownika",500.00);
+
+INSERT INTO wynagrodzenie VALUES(1,"2020-05-06",1,2,3,4);
+INSERT INTO wynagrodzenie VALUES(2,"2020-05-06",5,6,7,8);
+INSERT INTO wynagrodzenie VALUES(3,"2020-05-06",1,2,3,4);
+INSERT INTO wynagrodzenie VALUES(4,"2020-05-06",5,6,7,8);
+INSERT INTO wynagrodzenie VALUES(5,"2020-05-06",5,2,3,2);
+INSERT INTO wynagrodzenie VALUES(6,"2020-05-06",2,4,5,1);
+INSERT INTO wynagrodzenie VALUES(7,"2020-05-06",1,2,7,3);
+INSERT INTO wynagrodzenie VALUES(8,"2020-05-06",9,2,1,3);
+INSERT INTO wynagrodzenie VALUES(9,"2020-05-06",2,5,6,1);
+INSERT INTO wynagrodzenie VALUES(10,"2020-05-06",4,9,6,2);
+
