@@ -1,0 +1,302 @@
+CREATE TABLE pracownicy(
+
+	id_pracownika SERIAL PRIMARY KEY,
+	imie VARCHAR(20) NOT NULL,
+	nazwisko VARCHAR(20) NOT NULL,
+	adres VARCHAR(50),
+	telefon VARCHAR(9)
+	
+
+)
+
+
+CREATE TABLE godziny(
+
+	id_godziny SERIAL PRIMARY KEY,
+	data DATE NOT NULL,
+	liczba_godzin INT NOT NULL,
+	id_pracownika INT REFERENCES pracownicy(id_pracownika)
+
+)
+
+CREATE TABLE pensja(
+
+	id_pensji SERIAL PRIMARY KEY,
+	stanowisko VARCHAR(50) NOT NULL,
+	kwota FLOAT NOT NULL
+
+)
+
+
+CREATE TABLE premia(
+ 
+	id_premii SERIAL PRIMARY KEY,
+	rodzaj VARCHAR(50),
+	kwota FLOAT
+
+)
+
+
+
+CREATE TABLE wynagrodzenie(
+
+	id_wynagrodzenia SERIAL PRIMARY KEY,
+	data DATE,
+	id_pracownika INT REFERENCES pracownicy(id_pracownika),
+	id_godziny INT REFERENCES godziny(id_godziny),
+	id_pensji INT REFERENCES pensja(id_pensji), 
+	id_premii INT REFERENCES premia(id_premii)
+
+)
+
+
+INSERT INTO pracownicy(imie,nazwisko,adres,telefon)
+VALUES ('Karolina','Kuna','ul. Budryka 3a Kraków','123456789')
+INSERT INTO pracownicy(imie,nazwisko,adres,telefon)
+VALUES ('Jan','Kowalski','ul. Krakowska 2 Kraków','987654321')
+INSERT INTO pracownicy(imie,nazwisko,adres,telefon)
+VALUES ('Anna','Nowak','ul. Królewska 1 Kraków','867543901')
+INSERT INTO pracownicy(imie,nazwisko,adres,telefon)
+VALUES ('Marek','Adamowski','ul. Bratysławska 10/22 Kraków','111112223')
+INSERT INTO pracownicy(imie,nazwisko,adres,telefon)
+VALUES ('Alicja','Badowska','ul. Podgórska 12/13 Kraków','444433355')
+INSERT INTO pracownicy(imie,nazwisko,adres,telefon)
+VALUES ('Mateusz','Baj','ul. Grudniowa 14/44 Kraków','999944477')
+INSERT INTO pracownicy(imie,nazwisko,adres,telefon)
+VALUES ('Tomasz','Gajda','ul. Mogilska 22a Kraków','566789123')
+INSERT INTO pracownicy(imie,nazwisko,adres,telefon)
+VALUES ('Wiktor','Grabowski','ul. Czarnowiejska 44 Kraków','333444110')
+INSERT INTO pracownicy(imie,nazwisko,adres,telefon)
+VALUES ('Adrianna','Chmiel','ul. Warszawska 11a Kraków','555566610')
+INSERT INTO pracownicy(imie,nazwisko,adres,telefon)
+VALUES ('Katarzyna','Halicka','ul. Mazowiecka 34/57 Kraków','111000222')
+
+
+INSERT INTO pensja(stanowisko,kwota)
+VALUES('Junior java developer',4000)
+
+INSERT INTO pensja(stanowisko,kwota)
+VALUES('Senior java developer',8000)
+
+INSERT INTO pensja(stanowisko,kwota)
+VALUES('Junior python developer',4000)
+
+INSERT INTO pensja(stanowisko,kwota)
+VALUES('Senior python developer',8000)
+
+INSERT INTO pensja(stanowisko,kwota)
+VALUES('Data scientist',5000)
+
+INSERT INTO pensja(stanowisko,kwota)
+VALUES('Javascript developer',5500)
+
+INSERT INTO pensja(stanowisko,kwota)
+VALUES ('Manager',4500)
+
+INSERT INTO pensja(stanowisko,kwota)
+VALUES ('Executive',10000)
+
+INSERT INTO pensja(stanowisko,kwota)
+VALUES('HR specialist',3550)
+
+INSERT INTO pensja(stanowisko,kwota)
+VALUES('Accountant ',3000)
+
+
+INSERT INTO premia(rodzaj,kwota)
+VALUES('tygodniowa',500)
+
+INSERT INTO premia(rodzaj,kwota)
+VALUES('miesięczna',1500)
+
+INSERT INTO premia(rodzaj,kwota)
+VALUES('kwartalna',2000)
+
+INSERT INTO premia(rodzaj,kwota)
+VALUES('roczna',2100)
+
+
+INSERT INTO premia(rodzaj,kwota)
+VALUES('nadgodziny',600)
+
+
+INSERT INTO premia(rodzaj,kwota)
+VALUES('projekt',400)
+
+INSERT INTO premia(rodzaj,kwota)
+VALUES('nadgodziny',650)
+
+INSERT INTO premia(rodzaj,kwota)
+VALUES('polecenie pracownika',100)
+
+INSERT INTO premia(rodzaj,kwota)
+VALUES('nadgodziny',770)
+
+INSERT INTO premia(rodzaj,kwota)
+VALUES('nadgodziny',850)
+
+INSERT INTO godziny(data,liczba_godzin,id_pracownika)
+VALUES ('01-01-2020',160,1)
+
+
+INSERT INTO godziny(data,liczba_godzin,id_pracownika)
+VALUES ('02-01-2020',155,2)
+
+INSERT INTO godziny(data,liczba_godzin,id_pracownika)
+VALUES ('03-01-2020',150,3)
+
+INSERT INTO godziny(data,liczba_godzin,id_pracownika)
+VALUES ('04-01-2020',140,4)
+
+INSERT INTO godziny(data,liczba_godzin,id_pracownika)
+VALUES ('05-01-2020',130,5)
+
+INSERT INTO godziny(data,liczba_godzin,id_pracownika)
+VALUES ('06-02-2020',125,6)
+
+INSERT INTO godziny(data,liczba_godzin,id_pracownika)
+VALUES ('07-02-2020',120,7)
+
+INSERT INTO godziny(data,liczba_godzin,id_pracownika)
+VALUES ('08-03-2020',110,8)
+
+INSERT INTO godziny(data,liczba_godzin,id_pracownika)
+VALUES ('09-04-2020',100,9)
+
+INSERT INTO godziny(data,liczba_godzin,id_pracownika)
+VALUES ('10-05-2020',90,10)
+
+INSERT INTO wynagrodzenie(data,id_pracownika,id_godziny,id_pensji,id_premii)
+VALUES('30-01-2020',1,1,1,1)
+
+INSERT INTO wynagrodzenie(data,id_pracownika,id_godziny,id_pensji,id_premii)
+VALUES('30-01-2020',2,2,2,2)
+
+INSERT INTO wynagrodzenie(data,id_pracownika,id_godziny,id_pensji,id_premii)
+VALUES('30-03-2020',3,3,3,3)
+
+INSERT INTO wynagrodzenie(data,id_pracownika,id_godziny,id_pensji,id_premii)
+VALUES('30-04-2020',4,4,4,4)
+
+INSERT INTO wynagrodzenie(data,id_pracownika,id_godziny,id_pensji,id_premii)
+VALUES('30-05-2020',5,5,5,5)
+
+INSERT INTO wynagrodzenie(data,id_pracownika,id_godziny,id_pensji,id_premii)
+VALUES('30-06-2020',6,6,6,6)
+
+INSERT INTO wynagrodzenie(data,id_pracownika,id_godziny,id_pensji,id_premii)
+VALUES('29-02-2020',7,7,7,7)
+
+INSERT INTO wynagrodzenie(data,id_pracownika,id_godziny,id_pensji,id_premii)
+VALUES('30-03-2020',8,8,8,8)
+
+INSERT INTO wynagrodzenie(data,id_pracownika,id_godziny,id_pensji,id_premii)
+VALUES('30-04-2020',9,9,9,9)
+
+INSERT INTO wynagrodzenie(data,id_pracownika,id_godziny,id_pensji,id_premii)
+VALUES('30-05-2020',10,10,10,10)
+
+
+
+Zad 6
+
+a) SELECT id_pracownika,nazwisko FROM pracownicy
+
+
+b) SELECT id_pracownika FROM wynagrodzenie
+LEFT JOIN pensja ON wynagrodzenie.id_pensji = pensja.id_pensji
+WHERE kwota >1000
+
+c)
+SELECT id_pracownika FROM wynagrodzenie
+LEFT JOIN premia ON wynagrodzenie.id_premii = premia.id_premii
+LEFT JOIN pensja ON wynagrodzenie.id_pensji = pensja.id_pensji
+WHERE premia.kwota IS null AND pensja.kwota > 2000
+
+d) SELECT imie,nazwisko FROM pracownicy
+WHERE imie LIKE 'J%'
+
+e) SELECT imie,nazwisko FROM pracownicy
+WHERE imie LIKE '%a' AND nazwisko ILIKE '%n%'
+
+f)SELECT id_pracownika FROM godziny
+WHERE liczba_godzin>160
+
+g) SELECT imie, nazwisko FROM wynagrodzenie 
+LEFT JOIN pracownicy ON wynagrodzenie.id_pracownika = pracownicy.id_pracownika
+LEFT JOIN pensja ON wynagrodzenie.id_pensji = pensja.id_pensji
+WHERE pensja.kwota >= 1500.00 AND  pensja.kwota<=3000.00;
+
+h)SELECT imie,nazwisko FROM wynagrodzenie
+LEFT JOIN godziny ON wynagrodzenie.id_pracownika = godziny.id_pracownika
+LEFT JOIN premie ON wynagrodzenie.id_pracownika = premie.id_premii
+WHERE godziny.liczba_godzin > 160 AND premia.kwota <=0
+
+i)
+SELECT imie, nazwisko, pensja.kwota FROM wynagrodzenie 
+LEFT JOIN pracownicy ON wynagrodzenie.id_pracownika = pracownicy.id_pracownika
+LEFT JOIN pensja ON wynagrodzenie.id_pensji = pensja.id_pensji
+ORDER BY pensja.kwota DESC;
+
+j)
+
+SELECT imie, nazwisko, pensja.kwota,premia.kwota FROM wynagrodzenie 
+LEFT JOIN pracownicy ON wynagrodzenie.id_pracownika = pracownicy.id_pracownika
+LEFT JOIN pensja ON wynagrodzenie.id_pensji = pensja.id_pensji
+LEFT JOIN premia ON wynagrodzenie.id_premii = premia.id_premii
+ORDER BY pensja.kwota,premia.kwota
+
+k) SELECT COUNT(DISTINCT(stanowisko)), stanowisko FROM wynagrodzenie 
+LEFT JOIN pracownicy ON wynagrodzenie.id_pracownika = pracownicy.id_pracownika
+LEFT JOIN pensja ON wynagrodzenie.id_pensji = pensja.id_pensji
+GROUP BY pensja.stanowisko;
+
+
+l)
+
+SELECT AVG(kwota),MIN(kwota),MAX(kwota) FROM wynagrodzenie
+LEFT JOIN pensja ON wynagrodzenie.id_pensji = pensja.id_pensji
+LEFT JOIN pracownicy ON wynagrodzenie.id_pracownika  = pracownicy.id_pracownika
+GROUP BY pensja.stanowisko HAVING stanowisko='Executive'
+
+m)
+
+SELECT SUM(kwota) FROM wynagrodzenie
+LEFT JOIN pensja ON wynagrodzenie.id_pensji = pensja.id_pensji
+
+n)SELECT stanowisko, SUM(kwota) FROM wynagrodzenie
+LEFT JOIN pensja ON wynagrodzenie.id_pensji = pensja.id_pensji
+GROUP BY pensja.stanowisko
+
+o)
+SELECT stanowisko,COUNT(pensja.kwota) FROM wynagrodzenie
+LEFT JOIN pensja ON wynagrodzenie.id_pensji = pensja.id_pensji
+LEFT JOIN premia ON wynagrodzenie.id_premii = premia.id_premii
+WHERE pensja.kwota IS NOT NULL
+GROUP BY pensja.stanowisko;
+
+p)DELETE FROM pracownicy 
+WHERE EXISTS
+(SELECT * FROM wynagrodzenie
+LEFT JOIN pensja ON wynagrodzenie.id_pensji = pensja.id_pensji
+LEFT JOIN pracownicy ON wynagrodzenie.id_pracownika = pracownicy.id_pracownika
+WHERE pensja.kwota < 1200);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
